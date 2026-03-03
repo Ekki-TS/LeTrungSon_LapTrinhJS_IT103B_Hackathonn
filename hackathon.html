@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý danh sách phim yêu thích</title>
+</head>
+
+<body>
+    <h1>Favorite Movies Watchlist Manager</h1>
+    <script>
+        let watchList = [`
+            {
+                id: M001,
+                title: Inception,
+                director: Christopher_Nolan,
+                genre: Action,
+                year: 2010,
+                rating: 8.5,
+            },
+
+            {
+                id: M002,
+                title: Parasite,
+                director: Bong_Joon_ho,
+                genre: Drama,
+                year: 2026,
+                rating: 9.4,
+            },
+            
+            {
+                id: M003,
+                title: Rikkei,
+                director: Idk,
+                genre: Comedy,
+                year: 2007,
+                rating: 8.2,
+            },
+
+            {
+                id: M004,
+                title: Success,
+                director: TryHard,
+                genre: Horror,
+                year: 1980,
+                rating: 6.7,
+            },
+
+            {
+                id: M005,
+                title: exit,
+                director: Recap,
+                genre: Thriller,
+                year: 1967,
+                rating: 4.1,
+            },
+        `];
+
+        function addFilm(watchlist) {
+            let name = prompt(`Nhập tên phim bạn muốn thêm: `);
+
+            let addId = +prompt(`Nhập id film bạn muốn thêm: `).trim();
+            if (addId === watchList.id) {
+                console.log(`ID đã tồn tại, vui lòng chọn ID khác.`);
+            }
+
+            let addTitle = prompt(`Nhập tiêu đề phim bạn muốn thêm: `).trim();
+            let addDirector = prompt(`Nhập tác giả phim bạn muốn thêm: `).trim();
+            
+
+            let years = parseInt(prompt(`Nhập năm phim bạn muốn thêm: `));
+            if (years < 1900) {
+                alert(`Năm phát hành phải là số nguyên từ 1900`);
+                return years;
+            }
+
+            let ratings = +prompt(`Nhập rating của phim:  `).toFixed(1);
+            if(ratings <= 1.0 || ratings >= 10.0) {
+                alert(`Điểm rating phải là số từ 1.0 đến 10.0.`);
+            }
+
+            let addGenre = prompt(`Nhập thể loại phim: `);
+            let validGenre = ['Action', 'Drama', 'Sci-Fi', 'Comedy', 'Horror', 'Thriller']
+            if(addGenre != validGenre) {
+                alert(`Thể loại không hợp lệ. Phải là một trong các giá trị: 'Action', 'Drama', 'Sci-Fi', 'Comedy', 'Horror', 'Thriller'.`);
+            }
+            
+            alert(`Đã thêm phim: ${name} (${years}) vào watchlist!`);
+        }
+
+        function deleteFilm(watchList) {
+            let deletedfilm = prompt("Nhập tên phim bạn muốn xóa: ");
+
+        }
+
+        function displayFilm(watchList) {
+            console.table(watchList)
+        }
+
+        function updateFilm(watchList) {
+            const newFilm = [`
+                id: id
+                name: name
+                director: director
+                
+            `]
+
+            newFilm.id = id
+            newFilm.title = title
+        }
+
+        function searchFilm(watchList) {
+            let findFilm = watchList.findIndex(film => film.name.toLowerCase())
+        }
+
+        function filterByGenre(watchList) {
+            let genreWanted = prompt("Nhập thể loại phim bạn muốn lọc:  ");
+            if(genreWanted == "" || gerneWanted == null) {
+                alert(`Thể loại không hợp lệ`)
+            }
+            if(genreWanted == watchList.gener) {
+
+            }
+
+        }
+
+        function averageWatchlist(watchList) {
+            
+        }
+
+        function sortAsc(watchList) {
+            console.log("Danh sách theo thứ tự tăng dần");
+            result = watchList.year.sort((a, b) => a.year - b.year)
+            console.table(result);
+        }
+
+        function sortDesc(watchList) {
+            console.log("Danh sách theo thứ tự giảm dần");
+            result = watchList.year.sort((a, b) => b.year - a.year)
+            console.table(result);
+        }
+
+        function sortByYear(watchList) {
+            let choice;
+            do {
+                let choice = +prompt(`Nhập lựa chọn của bạn:
+                1. Tăng dần
+                2. Giảm dần
+                `);
+                switch (chocie) {
+                    case 1:
+                        sortAsc(watchList);
+                        break;
+                    case 2:
+                        sortDesc(watchList);
+                        break;
+                    default:
+                        alert(`Lựa chọn không hợp lệ vui lọng nhập lại từ 1-2`);
+                        break;
+                }
+            } while (choice != 2)
+
+        }
+
+        function menu() {
+            let choice;
+            do {
+                let choice = +prompt(`Nhập lựa chọn của bạn:
+            1. Thêm phim
+            2. Xóa phim
+            3. Hiển thị danh sách watchlist 
+            4. Cập nhật thông tin phim  
+            5. Tìm phim
+            6. Lọc phim theo thể loại
+            7. Tính điểm trung bình watchlist
+            8. Sắp xếp watchlist theo năm phát hành
+            9. Phân tích mức độ "cổ điển" vs "hiện đại" trong watchlist
+            10.Thoát.
+            `);
+
+                switch (choice) {
+                    case 1:
+                        addFilm(watchList);
+                        break;
+                    case 2:
+                        deleteFilm(watchList);
+                        break;
+                    case 3:
+                        displayFilm(watchList);
+                        break;
+                    case 4:
+                        updateFilm(watchList);
+                        break;
+                    case 5:
+                        searchFilm(watchList)
+                        break;
+                    case 6:
+                        filterByGenre(watchList);
+                        break;
+                    case 7:
+                        averageWatchlist(watchList);
+                        break;
+                    case 8:
+                        sortByYear(watchList);
+                        break;
+                    case 9:
+                        break;
+                    case 10:
+                        alert("Thoát chương trình");
+                        exit();
+                    default:
+                        alert(`Lựa chọn không hợp lệ vui lòng chọn số từ 1 - 9`);
+                        break;
+                }
+            } while (choice != 9)
+        }
+
+        menu();
+    </script>
+</body>
+
+</html>
